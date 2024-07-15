@@ -102,7 +102,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Log Out</a></li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}">Log Out</a></li>
                         </ul>
 
                     </div>
