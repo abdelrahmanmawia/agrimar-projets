@@ -45,16 +45,16 @@
                                 <div class="form-group mb-3">
                                     <input type="phone" name="phone" class="form-control" placeholder="phone" value="{{ old('phone') }}"
                                         autofocus>
-                                    @if ($errors->has('fullname'))
+                                    @if ($errors->has('phone'))
                                         <span class="text-danger text-left">{{ $errors->first('phone') }}</span>
                                     @endif
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <input type="text" name="address" class="form-control" placeholder="address" value="{{ old('address') }}"
+                                    <input type="text" name="region" class="form-control" placeholder="region" value="{{ old('region') }}"
                                         autofocus>
-                                    @if ($errors->has('fullname'))
-                                        <span class="text-danger text-left">{{ $errors->first('address') }}</span>
+                                    @if ($errors->has('region'))
+                                        <span class="text-danger text-left">{{ $errors->first('region') }}</span>
                                     @endif
                                 </div>
 

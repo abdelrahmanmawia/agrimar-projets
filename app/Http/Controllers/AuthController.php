@@ -43,7 +43,7 @@ class AuthController extends Controller
             'email' => 'required|unique:users|email',
             'password' => 'required',
             'phone' => 'required',
-            'address' => 'required',
+            'region' => 'required',
         ]);
 
         $user = new User();
@@ -51,7 +51,7 @@ class AuthController extends Controller
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
         $user->phone_number = $request->input('phone');
-        $user->address = $request->input('address');
+        $user->region = $request->input('region');
         if ($user->save()) {
             return redirect(route('login'))->with('success', 'User created successfully');
         }

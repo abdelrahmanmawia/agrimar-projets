@@ -49,11 +49,11 @@
     <section class="products mw-968 ml-auto mr-auto" id="products">
         <div class="heading d-flex justify-content-around mt-5 ">
             <h1 style="font-family: 'Montserrat';font-weight:bold;">Our Populars<span> products</h1>
-            <a href="#" class="btn btn-success border-0 border rounded-pill w-5 h-25 mt-3">Shop Now <i
+            <a href="{{ route('products.index')}}" class="btn btn-success border-0 border rounded-pill w-5 h-25 mt-3">Shop Now <i
                     class="bi bi-arrow-right"></i></a>
         </div>
         <!-- products content -->
-        <div class="products-conatiner d-grid gap-3 mt-3"
+        <div class="products-conatiner d-grid gap-3"
             style="grid-template-columns: repeat(auto-fit,minmax(260px,auto));">
             <!-- box1 -->
             @for ($i = 0; $i < 6; $i++)

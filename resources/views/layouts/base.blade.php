@@ -73,7 +73,7 @@
                             <a class="nav-link rounded-pill " aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link rounded-pill" href="/produit">Products</a>
+                            <a class="nav-link rounded-pill" href="{{ route('products.index')}}">Products</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link rounded-pill" href="#">Categories</a>
