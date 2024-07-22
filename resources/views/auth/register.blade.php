@@ -51,8 +51,12 @@
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <input type="text" name="region" class="form-control" placeholder="region" value="{{ old('region') }}"
-                                        autofocus>
+                                    <select name="region_id" id="region_id" class="form-control" placeholder="region">
+                                        <option value="" selected disabled>region</option>
+                                        @foreach ($regions as $region)
+                                            <option value="{{ $region->id }}">{{ $region->name }}</option>
+                                        @endforeach
+                                    </select>
                                     @if ($errors->has('region'))
                                         <span class="text-danger text-left">{{ $errors->first('region') }}</span>
                                     @endif

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Region;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+
 
 class AuthController extends Controller
 {
@@ -32,7 +34,8 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('auth.register');
+        $regions = Region::all();
+        return view('auth.register', ['regions' => $regions]);
     }
 
     public function registerPost(Request $request)
@@ -43,7 +46,7 @@ class AuthController extends Controller
             'email' => 'required|unique:users|email',
             'password' => 'required',
             'phone' => 'required',
-            'region' => 'required',
+            'region_id' => 'required',
         ]);
 
         $user = new User();
@@ -51,7 +54,7 @@ class AuthController extends Controller
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
         $user->phone_number = $request->input('phone');
-        $user->region = $request->input('region');
+        $user->region_id = $request->input('region');
         if ($user->save()) {
             return redirect(route('login'))->with('success', 'User created successfully');
         }

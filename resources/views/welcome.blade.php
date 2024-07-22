@@ -49,25 +49,31 @@
     <section class="products mw-968 ml-auto mr-auto" id="products">
         <div class="heading d-flex justify-content-around mt-5 ">
             <h1 style="font-family: 'Montserrat';font-weight:bold;">Our Populars<span> products</h1>
-            <a href="{{ route('products.index')}}" class="btn btn-success border-0 border rounded-pill w-5 h-25 mt-3">Shop Now <i
-                    class="bi bi-arrow-right"></i></a>
+            <a href="{{ route('products.index') }}" class="btn btn-success border-0 border rounded-pill w-5 h-25 mt-3">Shop
+                Now <i class="bi bi-arrow-right"></i></a>
         </div>
+        <br><br>
         <!-- products content -->
-        <div class="products-conatiner d-grid gap-3"
-            style="grid-template-columns: repeat(auto-fit,minmax(260px,auto));">
+        <div class="products-conatiner d-grid gap-3" style="grid-template-columns: repeat(auto-fit,minmax(260px,auto));">
             <!-- box1 -->
-            @for ($i = 0; $i < 6; $i++)
-            <div class="box position-relative br-1.5 p-20 " style="box-shadow: 1px 2px 11px 4px rgb(14 55 54 / 15%);">
-                <img src="images/Yellow Tractor - 640x589.png" class="w-100 object-fit-cover" alt="">
-                <span>name</span>
-                <h2>discription <br>kdjdkdmd</h2>
-                <h3 class="price">$39.44 </h3>
-                <!-- <span></span> -->
-                <i class="bi bi-cart"></i>
-                <i class="bi bi-heart"></i>
-
-            </div>
-            @endfor
+            @foreach ($products as $product)
+                <div class="col-md-4 mb-4">
+                    <div class="card"
+                        onclick="window.location.href = '{{ route('products.show', $product->id) }}'"
+                        style="width: 18rem;box-shadow: 1px 2px 11px 4px rgb(14 55 54 / 15%);background-color: #e3f2fd;">
+                        <img src="{{ isset($product->image) ? asset('storage/' . $product->image) : '' }}"
+                            class="card-img-top" alt="{{ $product->name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $product->name }}</h5>
+                            {{-- <p class="card-text">{{ $product->description }}</p> --}}
+                            <p class="card-text"><strong>Address:</strong> {{ $product->address }}</p>
+                            <!-- Assuming address is a field in the product table -->
+                            <p class="card-text"><strong>Quantity:</strong> {{ $product->quantity }}</p>
+                            <p><strong>Price:</strong> {{ $product->price }} DH</p>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
 
 
@@ -102,7 +108,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="item" style="background-image: url(/images/end-road-with-beautiful-rainbow-after-rainy-weather.jpg);">
+                <div class="item"
+                    style="background-image: url(/images/end-road-with-beautiful-rainbow-after-rainy-weather.jpg);">
                     <div class="content">
                         <div class="title">Agricultural</div>
                         <div class="name">Machines</div>
@@ -140,10 +147,10 @@
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const nextBtn = document.querySelector('.next'),
-                      prevBtn = document.querySelector('.prev'),
-                      categories = document.querySelector('.categories'),
-                      list = document.querySelector('.list'),
-                      runningTime = document.querySelector('.categories .timeRunning');
+                    prevBtn = document.querySelector('.prev'),
+                    categories = document.querySelector('.categories'),
+                    list = document.querySelector('.list'),
+                    runningTime = document.querySelector('.categories .timeRunning');
 
                 let timeRunning = 3000;
                 let timeAutoNext = 7000;

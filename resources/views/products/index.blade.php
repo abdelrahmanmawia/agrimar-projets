@@ -6,24 +6,51 @@
 
     <section style="margin-top: 80px">
 
-        <<div class="container mt-5 Pt-10">
-            <h1 class="mb-4">Products</h1>
-            <div class="row">
-                @foreach($products as $product)
-                    <div class="col-md-4 mb-4">
-                        <div class="card" style="width: 18rem;box-shadow: 1px 2px 11px 4px rgb(14 55 54 / 15%);background-color: #e3f2fd;">
-                            <img src="{{isset($product->image) ? asset('storage/' . $product->image) : ''}}" class="card-img-top" alt="{{ $product->name }}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $product->name }}</h5>
-                                {{-- <p class="card-text">{{ $product->description }}</p> --}}
-                                <p class="card-text"><strong>Address:</strong> {{ $product->address }}</p> <!-- Assuming address is a field in the product table -->
-                                <p class="card-text"><strong>Quantity:</strong> {{ $product->quantity }}</p>
-                                <p><strong>Price:</strong> {{ $product->price }} DH</p>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+
+        <h1>products</h1>
+        @if (session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
             </div>
+        @endif
+        @if (session()->has('error'))
+            <div class="alert alert-danger">
+                {{ session()->get('error') }}
+            </div>
+        @endif
+        <div>
+            <table class="table" border="1">
+                <tr>
+
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>image</th>
+                    <th>description</th>
+                    <th>action</th>
+
+                    @foreach ($products as $product)
+                <tr>
+
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->region->name }}</td>
+                    <td>{{ $product->price }} dh</td>
+                    <td>{{ $product->quantity }}</td>
+                    <td> <img src="{{ isset($product->image) ? asset('storage/' . $product->image) : '' }}"
+                            class="img-thumbnail" alt="{{ $product->name }}" width="100" height="100"></td>
+                    <td>{{ $product->description }}</td>
+                    <td><a href="{{ route('products.edit', $product->id) }}"><button class="btn btn-primary">Edit</button></a>
+                        <a href="{{ route('products.destroy', $product->id) }}" onclick="return confirm('Are you sure you want to delete this product?')"><button class="btn btn-danger">Delete</button></a>
+                    </td>
+                </tr>
+                @endforeach
+                </tr>
+            </table>
+            <a href="{{ route('products.create') }}"><button class="btn btn-primary">Add product</button></a>
+
         </div>
         <!-- Bootstrap JS and dependencies -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

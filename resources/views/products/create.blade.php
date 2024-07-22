@@ -8,6 +8,17 @@
     <main class="mt-5">
         <div class="container mt-5 mb-5 p-5 br-1.5 bg-white shadow w-50">
             <h3>Create product</h3>
+            <div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
             <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
@@ -21,8 +32,13 @@
                 </div>
                 <div>
                     <div class="form-group mb-3">
-                        <label for="address">address of the product</label>
-                        <input type="text" name="address" id="address" class="form-control">
+                        <label for="region">address of the product</label>
+                        <select name="region_id" id="region_id" class="form-control" placeholder="region">
+                            <option value="" selected disabled>region</option>
+                            @foreach ($regions as $region)
+                                <option value="{{ $region->id }}">{{ $region->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="form-group mb-3">

@@ -94,8 +94,8 @@
                             <i class="bi bi-person-circle"></i>
                         </a>
                         <ul class="dropdown-menu ">
-                            <li><a class="dropdown-item" href="/login">Sign In/Register</a></li>
-                            <li><a class="dropdown-item" href="/profile">User Profile</a></li>
+                            <li><a class="dropdown-item" href="/login">user profile</a></li>
+                            <li><a class="dropdown-item" href={{ route('products.index')}}>my products</a></li>
                             <li><a class="dropdown-item" href="#">Customer Service</a></li>
                             <li><a class="dropdown-item" href="/cart"><i class="bi bi-cart-fill"></i> Cart (0)</a>
                             </li>

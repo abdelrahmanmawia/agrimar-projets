@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('image');
             $table->string('price');
             $table->string('quantity');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('address');
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('region_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

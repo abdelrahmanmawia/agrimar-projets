@@ -16,7 +16,23 @@ class product extends Model
         'image',
         'quantity',
         'category_id',
-        'address',
+        'region_id',
+        'user_id',
     ];
+
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+    public function region()
+    {
+        return $this->belongsTo(Region::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }
