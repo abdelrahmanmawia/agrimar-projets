@@ -6,6 +6,18 @@
 
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+
+    @elseif(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+
+    @endif
+
     <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item" data-bs-interval="10000">
@@ -59,7 +71,6 @@
             @foreach ($products as $product)
                 <div class="col-md-4 mb-4">
                     <div class="card"
-                        onclick="window.location.href = '{{ route('products.show', $product->id) }}'"
                         style="width: 18rem;box-shadow: 1px 2px 11px 4px rgb(14 55 54 / 15%);background-color: #e3f2fd;">
                         <img src="{{ isset($product->image) ? asset('storage/' . $product->image) : '' }}"
                             class="card-img-top" alt="{{ $product->name }}">
@@ -71,6 +82,11 @@
                             <p class="card-text"><strong>Quantity:</strong> {{ $product->quantity }}</p>
                             <p><strong>Price:</strong> {{ $product->price }} DH</p>
                         </div>
+
+                        <a href="{{ route('products.show', $product) }}" class="btn btn-primary">View Details</a>
+                        <a href="{{ route('orders.create', $product) }}" class="btn btn-success">create order</a>
+                        <i class="bi bi-cart" style="background-color: #ddead1 ;color: #000000; " ></i>
+
                     </div>
                 </div>
             @endforeach

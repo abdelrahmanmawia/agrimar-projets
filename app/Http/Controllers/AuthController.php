@@ -24,11 +24,18 @@ class AuthController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
 
-        if (auth()->attempt($credentials)) {
-            return redirect(route('home'))->with('success', 'Login successful');
-        } else {
-            return redirect(route('login'))->with('error', 'login failed');
+
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+
+            if ($user->role === 'admin') {
+                return redirect()->route('dashboard')->with('success', 'Login successful');
+            }
+
+            return redirect()->route('home')->with('success', 'Login successful');
         }
+
+        return redirect()->route('login')->with('error', 'Login failed');
 
     }
 

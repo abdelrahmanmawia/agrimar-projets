@@ -15,7 +15,15 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::all() ->where('user_id', auth()->user()->id);
+
+        if(auth()->user()->role == 'admin') {
+            $products = Product::all();
+
+            return view('admin.products.index', ['products' => $products]);
+        } else {
+            $products = Product::all() ->where('user_id', auth()->user()->id);
+        }
+
 
         return view('products.index', ['products' => $products]);
     }
@@ -84,6 +92,10 @@ class ProductController extends Controller
     public function create() {
         $categories = Category::all();
         $regions = Region::all();
+
+        if(auth()->user()->role == 'admin') {
+            return view('admin.products.create', ['categories' => $categories], ['regions' => $regions]);
+        }
 
 
         return view('products.create', ['categories' => $categories], ['regions' => $regions]);

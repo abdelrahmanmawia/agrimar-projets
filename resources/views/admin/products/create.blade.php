@@ -1,0 +1,77 @@
+@extends('layouts.admin')
+
+@section('title', 'products')
+
+@section('content')
+
+
+
+
+
+        <div class="container mt-5 mb-5 p-5 br-1.5 bg-white shadow w-50">
+            <h3>Create product</h3>
+            <div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+            <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
+                @csrf
+
+                <div class="form-group mb-3">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="description">Description</label>
+                    <input type="text" name="description" id="description" class="form-control" value="{{ old('description') }}">
+                </div>
+                <div>
+                    <div class="form-group mb-3">
+                        <label for="region">address of the product</label>
+                        <select name="region_id" id="region_id" class="form-control" placeholder="region">
+                            <option value="" selected disabled>region</option>
+                            @foreach ($regions as $region)
+                                <option value="{{ $region->id }}">{{ $region->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="image">Image</label>
+                    <input type="file" name="image" id="image" class="form-control" value="{{ old('image') }}">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="price">Price</label>
+                    <input type="number" name="price" id="price" class="form-control">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" name="quantity" id="quantity" class="form-control" value="{{ old('quantity') }}">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="category_id">Category</label>
+                    <select name="category_id" id="category_id" class="form-control">
+                        <option value="" selected disabled> choose one categorey</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+
+        </div>
+
+
+
+
+@endsection
