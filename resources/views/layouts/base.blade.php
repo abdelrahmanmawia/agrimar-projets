@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>@yield('title')</title>
     {{-- font --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,6 +28,10 @@
             --light-orange-color: #ff7e00;
             --text-color: #1a2428;
             --bg-color: #ddead1;
+        }
+
+        .header-logo {
+           background-image: url('images/AGRIMAR (1) (3).ico');
         }
 
         .collapse a {
@@ -56,12 +61,14 @@
             style="background-color: #e3f2fd;
                   box-shadow: 0 8px 11px rgb(14 15 54 / 15%);
                   padding: 20px 100px ;
-                  transition: 0.5s;">
+                  transition: 0.5s;
+                  height: 80px;">
+
 
             <div class="container-fluid">
 
                 <a class="navbar-brand" href="#" style="font-weight: bold; "><i
-                        class="bi bi-tree-fill"></i>Agrimar</a>
+                       ><img src="{{ asset('images/AGRIMAR (1) (3).ico') }}" style="margin-right: 10px;" width="60" height="60" alt=""></i>Agrimar</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -73,14 +80,14 @@
                             <a class="nav-link rounded-pill " aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link rounded-pill" href="{{ route('products.index')}}">Products</a>
+                            <a class="nav-link rounded-pill" href="{{ route('products')}}">Products</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link rounded-pill" href="#">Categories</a>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2 rounded-pill" type="search" placeholder="Search"
+                    <form class="d-flex" role="search"  action="{{ route('products.search') }}" method="GET">
+                        <input class="form-control me-2 rounded-pill" type="search" placeholder="Search" name="query"
                             aria-label="Search">
                         <button class="btn btn-outline-success rounded-circle" type="submit"><i
                                 class="bi bi-search"></i></button>
@@ -94,10 +101,11 @@
                             <i class="bi bi-person-circle"></i>
                         </a>
                         <ul class="dropdown-menu ">
-                            <li><a class="dropdown-item" href="/login">user profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('profile')}}">user profile</a></li>
                             <li><a class="dropdown-item" href={{ route('products.index')}}>my products</a></li>
-                            <li><a class="dropdown-item" href="#">Customer Service</a></li>
-                            <li><a class="dropdown-item" href="/cart"><i class="bi bi-cart-fill"></i> Cart (0)</a>
+                            <li><a class="dropdown-item" href="{{ route('seller.orders')}}">orders to dilliver</a></li>
+                            <li><a class="dropdown-item" href="{{ route('user.orders')}}">my orders</a></li>
+                            <li><a class="dropdown-item" href={{ route('messages.index')}}> chats</a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">

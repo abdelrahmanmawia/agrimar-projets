@@ -5,63 +5,65 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function index()
+
+
+
+
+
+    public function create(Request $request, $productId)
     {
-        $orders = Order::all()-> where('buyer_id', auth()->user()->id);
-        return view('orders.index', ['orders' => $orders]);
-    }
+        $product = Product::find($productId);
 
+        if (!$product) {
+            return redirect()->back()->with('error', 'Product not found.');
+        }
 
+        $quantity = $request->input('quantity', 1);
+        $totalPrice = $quantity * $product->price;
 
-    /**
-     * Create a new order.
-     *
-     * @param  int  $id The ID of the product.
-     * @return \Illuminate\View\View The view for creating an order.
-     */
-    public function create(int $id): \Illuminate\View\View
-    {
-        $product = Product::FindOrFail($id);
-
-        return view('orders.create')->with('product', $product);
-    }
-
-    /**
-     * Store a newly created order.
-     *
-     * @param  \Illuminate\Http\Request  $request The HTTP request.
-     * @param  int  $id The ID of the product.
-     * @return \Illuminate\Http\RedirectResponse The HTTP redirect response.
-     */
-    public function store(Request $request, int $id): \Illuminate\Http\RedirectResponse
-    {
-        $product = Product::FindOrFail($id);
-        $request->validate([
-            'address' => 'required',
-            'quantity' => 'required',
-            'product_id' => $product->id,
-            'buyer_id' => auth()->user()->id,
-            'seller_id' => $product->user_id,
+        $order = Order::create([
+            'buyer_id' => Auth::id(),
+            'seller_id' => $product->user_id, // Assuming the product has a user_id indicating the seller
+            'total_price' => $totalPrice,
+            'status' => 'pending',
         ]);
 
-        $order = new Order();
-        $order->address = $request->address;
-        $order->quantity = $request->quantity;
-        $order->product_id = $request->product_id;
-        $order->buyer_id = auth()->user()->id;
-        $order->seller_id = $product->user_id;
-        $order->save();
+        $order->items()->create([
+            'product_id' => $productId,
+            'quantity' => $quantity,
+            'price' => $product->price,
+        ]);
 
-        return redirect()->route('orders.index') ->with('product', $product) ->with('success', 'Order created successfully');
+        return redirect()->route('orders.show', $order->id)->with('success', 'Order placed successfully.');
     }
 
-    public function destroy($id){
-        $order = Order::findOrFail($id);
-        $order->delete();
-        return redirect()->route('orders.index')->with('success', 'Order deleted successfully');
+    public function show($id)
+    {
+        $order = Order::with('items.product')->findOrFail($id);
+        return view('orders.show', compact('order'));
+    }
+
+    public function userOrders()
+    {
+        $orders = Order::where('buyer_id', Auth::id())->with('items.product')->get();
+        return view('orders.index', compact('orders'));
+    }
+
+    public function sellerOrders()
+    {
+        $orders = Order::where('seller_id', Auth::id())->with('items.product')->get();
+        return view('Orders.OrdersToDilliver', compact('orders'));
+    }
+
+    public function adminOrders()
+    {
+        $orders = Order::with('items.product', 'buyer')->get();
+        return view('admin.orders.index', compact('orders'));
     }
 
 

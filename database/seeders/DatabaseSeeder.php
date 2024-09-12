@@ -13,8 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([CategoriesTableSeeder::class]);
-        $this->call([RegionsTableSeeder::class]);
+
 
         // User::factory(10)->create();
 
@@ -25,6 +24,19 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
             'role' => 'admin'
         ]);
+
+        foreach (range(1, 10) as $index) {
+            User::factory()->create([
+                'name' => "user$index",
+                'email' => "user$index@gmail.com",
+                'password' => bcrypt('1234'),
+                'phone_number' => '0' . rand(100000000, 999999999),
+                'role' => 'user'
+            ]);
+        }
+        $this->call([CategoriesTableSeeder::class]);
+        $this->call([RegionsTableSeeder::class]);
+        $this->call([ProductsTableSeeder::class]);
 
     }
 }

@@ -60,7 +60,7 @@
 
     <section class="products mw-968 ml-auto mr-auto" id="products">
         <div class="heading d-flex justify-content-around mt-5 ">
-            <h1 style="font-family: 'Montserrat';font-weight:bold;">Our Populars<span> products</h1>
+            <h1 style="font-weight:bold;">Our Populars<span> Products</h1>
             <a href="{{ route('products.index') }}" class="btn btn-success border-0 border rounded-pill w-5 h-25 mt-3">Shop
                 Now <i class="bi bi-arrow-right"></i></a>
         </div>
@@ -70,22 +70,23 @@
             <!-- box1 -->
             @foreach ($products as $product)
                 <div class="col-md-4 mb-4">
-                    <div class="card"
+                    <div class="card h-100"
                         style="width: 18rem;box-shadow: 1px 2px 11px 4px rgb(14 55 54 / 15%);background-color: #e3f2fd;">
                         <img src="{{ isset($product->image) ? asset('storage/' . $product->image) : '' }}"
                             class="card-img-top" alt="{{ $product->name }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $product->name }}</h5>
                             {{-- <p class="card-text">{{ $product->description }}</p> --}}
-                            <p class="card-text"><strong>Address:</strong> {{ $product->address }}</p>
+                            <p class="card-text"><strong>Address:</strong> {{ $product->region->name }}</p>
                             <!-- Assuming address is a field in the product table -->
                             <p class="card-text"><strong>Quantity:</strong> {{ $product->quantity }}</p>
                             <p><strong>Price:</strong> {{ $product->price }} DH</p>
                         </div>
 
-                        <a href="{{ route('products.show', $product) }}" class="btn btn-primary">View Details</a>
-                        <a href="{{ route('orders.create', $product) }}" class="btn btn-success">create order</a>
-                        <i class="bi bi-cart" style="background-color: #ddead1 ;color: #000000; " ></i>
+
+                        <a href="{{ route('products.show', $product) }}" class="btn btn-success"> <i class="bi bi-cart" ></i>order</a>
+
+
 
                     </div>
                 </div>

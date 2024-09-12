@@ -5,22 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Cart extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['buyer_id', 'seller_id', 'total_price', 'status'];
-
+    protected $fillable = [
+        'user_id',
+        'seller_id',
+    ];
 
     public function items()
     {
-        return $this->hasMany(OrderItem::class);
-    }
-
-
-    public function buyer()
-    {
-        return $this->belongsTo(User::class, 'buyer_id');
+        return $this->hasMany(CartItem::class);
     }
 
     public function seller()
@@ -30,4 +26,3 @@ class Order extends Model
 
 
 }
-

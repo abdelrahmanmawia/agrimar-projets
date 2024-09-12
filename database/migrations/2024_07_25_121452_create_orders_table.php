@@ -15,16 +15,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('buyer_id');
             $table->unsignedBigInteger('seller_id');
-            $table->unsignedBigInteger('product_id');
-            $table->integer('quantity');
-            $table->integer('price');
-            $table->enum('status', ['processing', 'delivered', 'cancelled'])->default('processing');
+            $table->decimal('total_price', 10, 2);
+            $table->string('status')->default('pending'); // e.g., pending, completed, cancelled
 
 
 
             $table->foreign('buyer_id')->references('id')->on('users');
             $table->foreign('seller_id')->references('id')->on('users');
-            $table->foreign('product_id')->references('id')->on('products');
+
 
             $table->timestamps();
         });

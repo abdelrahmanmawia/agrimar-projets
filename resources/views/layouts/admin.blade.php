@@ -30,7 +30,7 @@
             <div class="list-group list-group-flush my-3">
 
                 <a href="{{ route('dashboard') }}"
-                    class="list-group-item list-group-item-action bg-transparent second-text active">
+                    class="list-group-item list-group-item-action bg-transparent second-text active" style="color: black">
                     <i class="fas fa-tachometer-alt me-2"></i>Dashboard
                 </a>
 
@@ -39,19 +39,15 @@
                     <i class="fas fa-home me-2"></i>Home
                 </a>
 
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-user me-2"></i>Profile
-                </a>
+
 
                 <a href="{{ route('dashboard.users')}}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-users me-2"></i>Users
                 </a>
 
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-chart-line me-2"></i>Analytics
-                </a>
 
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+
+                <a href="{{ route('admin.orders') }}" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-check me-2"></i>Orders
                 </a>
 
@@ -64,9 +60,6 @@
                     <i class="fas fa-list me-2"></i>Categories
                 </a>
 
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-comments me-2"></i> chat
-                </a>
 
                 <a href="{{ route('logout') }}"
                     class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">

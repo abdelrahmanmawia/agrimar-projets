@@ -32,8 +32,9 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::findOrFail($id);
+        $seller = $product->seller;
 
-        return view('products.show', ['product' => $product]);
+        return view('products.show', ['product' => $product], ['seller' => $seller]);
     }
 
 
@@ -148,6 +149,56 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
+
+    public function products() {
+
+        $products = Product::all();
+        $categories = Category::all();
+        $regions = Region::all();
+        return view('products.products', compact('products'), compact('categories')) ->with('regions', $regions);
+    }
+
+
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $categoryId = $request->input('category');
+        $minPrice = $request->input('min_price');
+        $maxPrice = $request->input('max_price');
+        $regionId = $request->input('region');
+
+        $categories = Category::all();
+        $regions = Region::all();
+
+        $products = Product::query();
+
+        if ($query) {
+            $products->where('name', 'like', '%' . $query . '%')
+                     ->orWhere('description', 'like', '%' . $query . '%');
+        }
+
+        if ($categoryId) {
+            $products->where('category_id', $categoryId);
+        }
+
+        if ($minPrice) {
+            $products->where('price', '>=', $minPrice);
+        }
+
+        if ($maxPrice) {
+            $products->where('price', '<=', $maxPrice);
+        }
+
+        if ($regionId) {
+            $products->where('region_id', $regionId);
+        }
+
+        $products = $products->get();
+
+        return view('products.search_results', compact('products'), compact('categories')) ->with('regions', $regions);
+    }
+
 
 
 
