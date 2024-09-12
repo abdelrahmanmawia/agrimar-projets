@@ -164,7 +164,7 @@ body{
 <body>
   <div class="wrapper">
 
-    <form action=" {{ route('register.post') }}" method="POST">
+    <form action=" {{ route('register.post') }}" method="POST" enctype="multipart/form-data">
         @csrf
       <h1>sign up</h1>
 
@@ -186,6 +186,15 @@ body{
         </div>
       </div>
 
+      <div class="form-group mb-3">
+        <label for="image">Image</label>
+        <input type="file" name="profile_image" id="image" class="form-control">
+    </div>
+    <div>
+        @if ($errors->has('profile_image'))
+            <span class="text-danger text-left">{{ $errors->first('profile_image') }}</span>
+        @endif
+    </div>
       <div class="input-box">
         <input type="text" placeholder="Phone" name="phone"  autofocus >
         <i class='bx bxs-phone'></i>

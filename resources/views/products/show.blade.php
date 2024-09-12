@@ -57,7 +57,7 @@
             </div>
 
             <div>
-                <div class="card-text border-bottom pb-3"><strong>seller:</strong> {{ $product->user->name }}</div>
+                <div class="card-text border-bottom pb-3"><strong>seller:</strong> <a href="{{ route('profile.show', $product->user->id) }}"> {{ $product->user->name }}</a></div>
                 <div class="card-text border-bottom pb-3"><strong>telephone:</strong> {{ $product->user->phone_number }}</div>
             </div>
 

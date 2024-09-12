@@ -135,23 +135,27 @@
                     <div class="tab-content">
 
                         <div class="tab-pane fade active show" id="account-general">
-                            <div class="card-body media align-items-center">
-                                <img src="{{ asset('images/Hajar.jpg') }}" alt class="d-block ui-w-80">
-                                <div class="media-body ml-4">
-                                    <label class="btn btn-outline-primary">
-                                        Upload new photo
-                                        <input type="file" name="image" class="account-settings-fileinput">
-                                    </label> &nbsp;
-                                    <button type="button" class="btn btn-default md-btn-flat">Reset</button>
-                                    <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
+                            <form action="{{ route('profile.update', $user->id) }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="card-body media align-items-center">
+
+                                    <img src="{{ isset($user->profile_image) && !empty($user->profile_image) ? asset('profile_images/' . $user->profile_image) : asset('images/hajar.jpg') }}"
+                                        alt class="d-block ui-w-80">
+                                    <div class="media-body ml-4">
+                                        <label class="btn btn-outline-primary">
+                                            Upload new photo
+                                            <input type="file" name="profile_image" id="image" class="form-control">
+                                            {{-- </label> &nbsp; --}}
+                                            {{-- <button type="button" class="btn btn-default md-btn-flat">Reset</button> --}}
+                                            <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K
+                                            </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <hr class="border-light m-0">
-                            <div class="card-body">
-                                <form action="{{ route('profile.update', $user->id) }}" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
+                                <hr class="border-light m-0">
+                                <div class="card-body">
+
                                     <div class="form-group">
                                         <label class="form-label">Username</label>
                                         <input type="text" name="name" class="form-control mb-1"
@@ -186,34 +190,36 @@
                                     <div class="text-right mt-3">
                                         <button type="submit" class="btn btn-primary">Save changes</button>
                                     </div>
-                                </form>
-                            </div>
-                        </div>
+                                </div>
+                            </form>
 
-
-
-
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="account-change-password">
-                    <div class="card-body pb-2">
-                        <div class="form-group">
-                            <label class="form-label">Current password</label>
-                            <input type="password" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">New password</label>
-                            <input type="password" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Repeat new password</label>
-                            <input type="password" class="form-control">
                         </div>
                     </div>
-                </div>
 
+
+
+
+                </div>
             </div>
+            <div class="tab-pane fade" id="account-change-password">
+                <div class="card-body pb-2">
+                    <div class="form-group">
+                        <label class="form-label">Current password</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">New password</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Repeat new password</label>
+                        <input type="password" class="form-control">
+                    </div>
+                </div>
+            </div>
+
         </div>
+    </div>
     </div>
     </div>
 

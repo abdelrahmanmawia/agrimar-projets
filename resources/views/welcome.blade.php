@@ -107,9 +107,9 @@
                             nutrition and various industries. Explore a wide range of high-quality meats, dairy products,
                             eggs, and fish. Whether you are looking for fresh, organic, or specialty items, we have it all
                             to meet your needs..</div>
-                        <div class="btn">
-                            <button>See More</button>
-                        </div>
+                            <div class="btn">
+                                <a href="{{ route('products.search') }}?category=2" class="btn btn-primary">See More</a>
+                            </div>
                     </div>
                 </div>
                 <div class="item" style="background-image: url(images/snowdrops-coming-out-ground.jpg);">
@@ -120,9 +120,9 @@
                             and various applications. From fresh fruits and vegetables to nutritious cereals, aromatic
                             herbs, seeds, and legumes, we provide top-quality produce that supports healthy living and
                             culinary creativity.</div>
-                        <div class="btn">
-                            <button>See More</button>
-                        </div>
+                            <div class="btn">
+                                <a href="{{ route('products.search') }}?category=1" class="btn btn-primary">See More</a>
+                            </div>
                     </div>
                 </div>
                 <div class="item"
@@ -135,11 +135,11 @@
                             harvesters, precise sprayers, reliable spreaders, and powerful agricultural mowers. Find the
                             right machinery to streamline your farming operations.</div>
                         <div class="btn">
-                            <button>See More</button>
+                            <a href="{{ route('products.search') }}?category=3" class="btn btn-primary">See More</a>
                         </div>
                     </div>
                 </div>
-                <div class="item" style="background-image: url(images/snowdrops-coming-out-ground.jpg);">
+                <div class="item" style="background-image: url(images/view-beautiful-rainbow-appearing-end-road.jpg);">
                     <div class="content">
                         <div class="title">Agricultural</div>
                         <div class="name">Services</div>
@@ -147,9 +147,9 @@
                             farming endeavors. We offer expert advice, soil testing, crop management, and equipment
                             maintenance to ensure your farm operates at its best. Let us help you achieve higher yields and
                             sustainable farming practices.</div>
-                        <div class="btn">
-                            <button>See More</button>
-                        </div>
+                            <div class="btn">
+                                <a href="{{ route('products.search') }}?category=4" class="btn btn-primary">See More</a>
+                            </div>
                     </div>
                 </div>
             </div>

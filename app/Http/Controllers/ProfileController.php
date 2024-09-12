@@ -38,6 +38,15 @@ class ProfileController extends Controller
         $user->email = $request->input('email');
         $user->phone_number = $request->input('phone_number');
         $user->region_id = $request->input('region');
+
+
+        if ($request->hasFile('profile_image')) {
+            $file = $request->file('profile_image');
+            $file_name = $file->getClientOriginalName();
+            $file->move(public_path('profile_images'), $file_name);
+            $user->profile_image = $file_name;
+        }
+
         $user->save();
         return redirect(route('profile'))->with('success', 'Profile updated successfully');
     }
