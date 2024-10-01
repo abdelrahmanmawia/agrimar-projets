@@ -217,6 +217,43 @@
         </script>
     </section>
 
+    <hr class="my-5">
+
+    <footer>
+        <!-- About 1 - Bootstrap Brain Component -->
+        <section class="py-3 py-md-5">
+            <div class="container">
+                <div class="row gy-3 gy-md-4 gy-lg-0 align-items-lg-center">
+                    <div class="col-12 col-lg-6 col-xl-5">
+                        <img class="img-fluid rounded" loading="lazy" src="images/about-us.jpg" alt="About 1">
+                    </div>
+                    <div class="col-12 col-lg-6 col-xl-7">
+                        <div class="row justify-content-xl-center">
+                            <div class="col-12 col-xl-11">
+                                <h2 class="mb-3">Who Are We?</h2>
+                                <p class="lead fs-4 text-secondary mb-3">We help people to build incredible brands and
+                                    superior products. Our perspective is to furnish outstanding captivating services.
+                                </p>
+                                <p class="mb-5">Agrimar is a website designed to serve as a perfect link between
+                                    sellers and buyers in the agricultural sector. The platform provides a comprehensive
+                                    solution for connecting farmers and growers with markets and potential buyers,
+                                    facilitating the direct and efficient sale and purchase of agricultural products.
+                                    Whether you're looking to buy crops or market your produce, Agrimar is the ideal
+                                    choice to meet your needs.</p>
+                                <div class="row gy-4 gy-md-0 gx-xxl-5X">
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </footer>
+
+
 
 
 @endsection

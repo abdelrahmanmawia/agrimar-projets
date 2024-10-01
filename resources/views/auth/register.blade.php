@@ -186,10 +186,10 @@ body{
         </div>
       </div>
 
-      <div class="form-group mb-3">
+      {{-- <div class="form-group mb-3">
         <label for="image">Image</label>
         <input type="file" name="profile_image" id="image" class="form-control">
-    </div>
+    </div> --}}
     <div>
         @if ($errors->has('profile_image'))
             <span class="text-danger text-left">{{ $errors->first('profile_image') }}</span>

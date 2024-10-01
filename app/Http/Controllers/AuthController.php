@@ -54,16 +54,16 @@ class AuthController extends Controller
             'password' => 'required',
             'phone' => 'required',
             'region_id' => 'required',
-            'profile_image' => 'required',
-            'profile_image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'profile_image' => 'required',
+            // 'profile_image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
         ]);
 
-        if ($request->hasFile('profile_image')) {
-            $file = $request->file('profile_image');
-            $file_name = $file->getClientOriginalName();
-            $file->move(public_path('profile_images'), $file_name);
-        }
+        // if ($request->hasFile('profile_image')) {
+        //     $file = $request->file('profile_image');
+        //     $file_name = $file->getClientOriginalName();
+        //     $file->move(public_path('profile_images'), $file_name);
+        // }
 
         $user = new User();
         $user->name = $request->input('fullname');
@@ -71,7 +71,7 @@ class AuthController extends Controller
         $user->password = Hash::make($request->input('password'));
         $user->phone_number = $request->input('phone');
         $user->region_id = $request->input('region');
-        $user->profile_image = $file_name;
+        // $user->profile_image = $file_name;
         if ($user->save()) {
             return redirect(route('login'))->with('success', 'User created successfully');
         }
